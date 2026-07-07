@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1xbet</title>
+<link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3HvfN4jsIwWZm1vXN9A_LTpIvjqDMMG1m3Q&s">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #F5F5F5;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ===== Header ===== */
+.header {
+    background: #F5F5F5;
+    padding: 16px 16px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    flex-shrink: 0;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.header-title {
+    color: #6488A4;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.header-caret {
+    color: #6488A4;
+    font-size: 13px;
+    margin-bottom: 3px;
+    font-weight: 600;
+}
+
+.header-icons {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.header-icons button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header-icons svg {
+    width: 22px;
+    height: 22px;
+    fill: #6488A4;
+}
+
+/* ===== Account row ===== */
+.account-row {
+    padding: 6px 16px 14px;
+    flex-shrink: 0;
+}
+
+.account-label {
+    color: #6488A4;
+    font-size: 11px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.account-balance-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.account-balance {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #0B1F3F;
+    font-size: 25px;
+    font-weight: 700;
+}
+
+.account-balance .caret {
+    color: #6488A4;
+    font-size: 15px;
+    margin-bottom: 3;
+}
+
+.deposit-btn {
+    background: #4BB867;
+    color: #F5F5F5;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(75, 184, 103, 0.3);
+    flex-shrink: 0;
+}
+
+.deposit-btn svg {
+    width: 16px;
+    height: 16px;
+    fill: #F5F5F5;
+}
+
+/* ===== Action row ===== */
+.action-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 16px 14px;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.action-pill {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #E9ECF1;
+    border-radius: 10px;
+    padding: 10px 10px;
+    cursor: pointer;
+}
+
+.action-pill svg {
+    width: 15px;
+    height: 15px;
+    fill: #468EDA;
+}
+
+.action-pill-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #6488A4;
+}
+
+/* ===== Scrollable list ===== */
+.scrollable-content {
+    flex: 1;
+    overflow-y: auto;
+    background: #EBEEF3;
+    border-radius: 20px 20px 0 0;
+    padding: 12px 0 75px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.scrollable-content::-webkit-scrollbar {
+    display: none;
+}
+
+.bet-card {
+    background: #F5F5F5;
+    margin: 0 auto 8px;
+    border-radius: 12px;
+    padding: 14px 16px;
+    width: 94%;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.08s ease;
+}
+
+.bet-card:active {
+    transform: scale(0.985);
+}
+
+.card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.card-date {
+    color: #6488A4;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.league-pill {
+    background: #5A7FFF;
+    color: #F5F5F5;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 5px;
+    letter-spacing: 0.3px;
+    margin-left: 8px;
+}
+
+.dots-btn {
+    background: none;
+    border: none;
+    color: #6488A4;
+    font-size: 18px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    padding: 2px 4px;
+}
+
+.bet-simple-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.bet-type-name {
+    color: #063163;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.bet-coef {
+    color: #063163;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.info-row:last-child {
+    margin-bottom: 0;
+}
+
+.info-label {
+    color: #6488A4;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.info-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #063163;
+}
+
+.gain-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.gain-value {
+    color: #4BB867;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.status-pill {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.status-pill.paid {
+    color: #4BB867;
+}
+
+.status-pill.lost {
+    color: #E02B2B;
+}
+
+.status-pill svg {
+    width: 15px;
+    height: 15px;
+}
+
+.perdu-label {
+    color: #E02B2B;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* top-cut card (no date row, appears scrolled) */
+.bet-card.cut-top .card-top,
+.bet-card.cut-top .bet-simple-row {
+    display: none;
+}
+
+/* ===== Bottom nav ===== */
+.bottom-nav {
+    background: #F5F5F5;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 8px 0 12px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 480px;
+    margin: 0 auto;
+    z-index: 10;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    color: #6488A4;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    flex: 1;
+    max-width: 70px;
+}
+
+.nav-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.nav-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: #6488A4;
+}
+
+.nav-item.active {
+    color: #2075D2;
+}
+
+.nav-item.active .nav-icon svg {
+    fill: #2075D2;
+}
+
+.nav-badge {
+    position: absolute;
+    top: -4px;
+    right: -6px;
+    background: #E02B2B;
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.coupon-btn {
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 45px;
+    height: 45px;
+    background: #2075D2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(32, 117, 210, 0.3);
+    cursor: pointer;
+    z-index: 11;
+    border: none;
+}
+
+.coupon-icon svg {
+    width: 25px;
+    height: 25px;
+    fill: #F5F5F5;
+}
+</style>
+</head>
+<body>
+
+    <!-- En-tête -->
+    <div class="header">
+        <div class="header-left">
+            <div class="header-title">Historique des paris</div>
+            <div class="header-caret">⌵</div>
+        </div>
+        <div class="header-icons">
+            <button aria-label="Filtrer">
+                <svg viewBox="0 0 24 24" id="magicoon-Filled" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:#6488A4;}</style> </defs> <title>filter</title> <g id="filter-Filled"> <path id="filter-Filled-2" data-name="filter-Filled" class="cls-1" d="M19.71,8l-4.77,4.77a1.5,1.5,0,0,0-.44,1.06V18a.479.479,0,0,1-.2.4l-4,3a.472.472,0,0,1-.3.1.545.545,0,0,1-.22-.05A.512.512,0,0,1,9.5,21V13.83a1.5,1.5,0,0,0-.44-1.06L4.29,8ZM18.5,2.5H5.5a2.006,2.006,0,0,0-2,2V6h17V4.5A2.006,2.006,0,0,0,18.5,2.5Z"></path> </g> </g></svg>
+            </button>
+            <button aria-label="Vue liste">
+                <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#000000" class="bi bi-menu-button-wide-fill" transform="matrix(1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M1.5 0A1.5 1.5 0 0 0 0 1.5v2A1.5 1.5 0 0 0 1.5 5h13A1.5 1.5 0 0 0 16 3.5v-2A1.5 1.5 0 0 0 14.5 0h-13zm1 2h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1zm9.927.427A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0l-.396-.396zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V8zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2H1zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2h14zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"></path> </g></svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Compte principal -->
+    <div class="account-row">
+        <div class="account-label">Compte principal</div>
+        <div class="account-balance-row">
+            <div class="account-balance">1 700 000 ₣ <span class="caret">⌵</span></div>
+            <button class="deposit-btn">
+                <svg viewBox="0 0 24 24"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6z"/></svg>
+                Déposer
+            </button>
+        </div>
+    </div>
+
+    <!-- Actions -->
+    <div class="action-row">
+        <div class="action-pill">
+            <svg fill="#000000" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M46.3,19.7H5.7c-0.9,0-1.6,0.7-1.6,1.6v23.5c0,2.6,2.1,4.7,4.7,4.7h34.4c2.6,0,4.7-2.1,4.7-4.7V21.3 C47.9,20.4,47.2,19.7,46.3,19.7z M18.2,41.6c0,0.9-0.7,1.6-1.6,1.6h-3.1c-0.9,0-1.6-0.7-1.6-1.6v-3.1c0-0.9,0.7-1.6,1.6-1.6h3.1 c0.9,0,1.6,0.7,1.6,1.6V41.6z M29.1,41.6c0,0.9-0.7,1.6-1.6,1.6h-3.1c-0.9,0-1.6-0.7-1.6-1.6v-3.1c0-0.9,0.7-1.6,1.6-1.6h3.1 c0.9,0,1.6,0.7,1.6,1.6V41.6z M29.1,30.7c0,0.9-0.7,1.6-1.6,1.6h-3.1c-0.9,0-1.6-0.7-1.6-1.6v-3.1c0-0.9,0.7-1.6,1.6-1.6h3.1 c0.9,0,1.6,0.7,1.6,1.6V30.7z M40.1,30.7c0,0.9-0.7,1.6-1.6,1.6h-3.1c-0.9,0-1.6-0.7-1.6-1.6v-3.1c0-0.9,0.7-1.6,1.6-1.6h3.1 c0.9,0,1.6,0.7,1.6,1.6V30.7z M43.2,7.2h-3.9V5.6c0-1.7-1.4-3.1-3.1-3.1c-1.7,0-3.1,1.4-3.1,3.1v1.6H19V5.6c0-1.7-1.4-3.1-3.1-3.1 s-3.1,1.4-3.1,3.1v1.6H8.8c-2.6,0-4.7,2.1-4.7,4.7v1.6c0,0.9,0.7,1.6,1.6,1.6h40.7c0.9,0,1.6-0.7,1.6-1.6v-1.6 C47.9,9.3,45.8,7.2,43.2,7.2z"></path> </g></svg>
+            <div class="action-pill-label">Par mois</div>
+        </div>
+        <div class="action-pill">
+            <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 34.96 34.96" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path d="M34.227,18.89L16.07,0.733c-0.577-0.578-1.4-0.836-2.206-0.694L3.846,1.823C2.814,2.007,2.006,2.815,1.822,3.847 L0.039,13.865c-0.143,0.805,0.116,1.628,0.694,2.206l18.156,18.156c0.488,0.487,1.128,0.731,1.768,0.731 c0.642,0,1.28-0.244,1.77-0.731l11.803-11.804C35.204,21.448,35.204,19.865,34.227,18.89z M9.426,9.455 c-1,0.985-2.609,0.973-3.594-0.026c-0.985-1-0.974-2.609,0.026-3.595c1-0.985,2.609-0.973,3.595,0.027 C10.438,6.859,10.425,8.468,9.426,9.455z"></path> </g> </g></svg>
+            <div class="action-pill-label">Vente</div>
+        </div>
+    </div>
+
+    <!-- Liste défilable -->
+    <div class="scrollable-content" id="scrollableList">
+
+
+
+        <!-- Carte 1 -->
+        <div class="bet-card" onclick="ouvrirDetails()">
+            <div class="card-top">
+                <div class="card-date">09.02.2025 (21:22)</div>
+                <button class="dots-btn">⋮</button>
+            </div>
+            <div class="bet-simple-row">
+                <div class="bet-type-name">Simple</div>
+                <div class="bet-coef">2.264</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Mise :</div>
+                <div class="info-value">500 ₣</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Gains :</div>
+                <div class="gain-row">
+                    <div class="gain-value">1132 ₣</div>
+                    <div class="status-pill paid">
+                        <svg viewBox="0 0 24 24" fill="#4BB867"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m-1.5 14.5-4-4L7.9 11l2.6 2.6L16.1 8l1.4 1.4Z"/></svg>
+                        Payé
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Carte 3 -->
+        <div class="bet-card" onclick="ouvrirDetails()">
+            <div class="card-top">
+                <div class="card-date">09.02.2025 (21:21)</div>
+                <button class="dots-btn">⋮</button>
+            </div>
+            <div class="bet-simple-row">
+                <div class="bet-type-name">Simple</div>
+                <div class="bet-coef">1.125</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Mise :</div>
+                <div class="info-value">500 ₣</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Gains :</div>
+                <div class="gain-row">
+                    <div class="gain-value">562.5 ₣</div>
+                    <div class="status-pill paid">
+                        <svg viewBox="0 0 24 24" fill="#4BB867"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m-1.5 14.5-4-4L7.9 11l2.6 2.6L16.1 8l1.4 1.4Z"/></svg>
+                        Payé
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte 4 (avec badge LaLiga) -->
+        <div class="bet-card" onclick="ouvrirDetails()">
+            <div class="card-top">
+                <div class="card-date">07.02.2025 (11:00) <span class="league-pill">LaLiga</span></div>
+                <button class="dots-btn">⋮</button>
+            </div>
+            <div class="bet-simple-row">
+                <div class="bet-type-name">Simple</div>
+                <div class="bet-coef">1.980</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Mise :</div>
+                <div class="info-value">1000 ₣</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Gains :</div>
+                <div class="gain-row">
+                    <div class="gain-value">1980 ₣</div>
+                    <div class="status-pill paid">
+                        <svg viewBox="0 0 24 24" fill="#4BB867"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m-1.5 14.5-4-4L7.9 11l2.6 2.6L16.1 8l1.4 1.4Z"/></svg>
+                        Payé
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte 5 -->
+        <div class="bet-card" onclick="ouvrirDetails()">
+            <div class="card-top">
+                <div class="card-date">06.02.2025 (18:45)</div>
+                <button class="dots-btn">⋮</button>
+            </div>
+            <div class="bet-simple-row">
+                <div class="bet-type-name">Multiple</div>
+                <div class="bet-coef">5.720</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Statut :</div>
+                <div class="status-pill lost">
+                    <svg viewBox="0 0 24 24" fill="#E02B2B"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2M7 11h10v2H7Z"/></svg>
+                    Perdu
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte 6 -->
+        <div class="bet-card" onclick="ouvrirDetails()">
+            <div class="card-top">
+                <div class="card-date">05.02.2025 (20:10)</div>
+                <button class="dots-btn">⋮</button>
+            </div>
+            <div class="bet-simple-row">
+                <div class="bet-type-name">Simple</div>
+                <div class="bet-coef">3.150</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Mise :</div>
+                <div class="info-value">2000 ₣</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Gains :</div>
+                <div class="gain-row">
+                    <div class="gain-value">6300 ₣</div>
+                    <div class="status-pill paid">
+                        <svg viewBox="0 0 24 24" fill="#4BB867"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m-1.5 14.5-4-4L7.9 11l2.6 2.6L16.1 8l1.4 1.4Z"/></svg>
+                        Payé
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Carte 7 -->
+        <div class="bet-card" onclick="ouvrirDetails()">
+            <div class="card-top">
+                <div class="card-date">03.02.2025 (16:30)</div>
+                <button class="dots-btn">⋮</button>
+            </div>
+            <div class="bet-simple-row">
+                <div class="bet-type-name">Simple</div>
+                <div class="bet-coef">1.610</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Mise :</div>
+                <div class="info-value">1500 ₣</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Gains :</div>
+                <div class="gain-row">
+                    <div class="gain-value">2415 ₣</div>
+                    <div class="status-pill paid">
+                        <svg viewBox="0 0 24 24" fill="#4BB867"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2m-1.5 14.5-4-4L7.9 11l2.6 2.6L16.1 8l1.4 1.4Z"/></svg>
+                        Payé
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Navigation du bas -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item">
+            <div class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 15"><path fill="currentColor" d="M8 16c3.314 0 6-2 6-5.5c0-1.5-.5-4-2.5-6c.25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6c-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75c0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5c-.179 1-.25 2 1 3c.625.5 1 1.364 1 2.25C11 14 9.657 15 8 15"/></svg>
+            </div>
+            <div>Populaire</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><g clip-path="url(#SVGwDJxaeOQ2)"><path fill="currentColor" d="M21.95 10.605a1.75 1.75 0 0 1-.5.86l-3.3 3.22a.4.4 0 0 0-.08.12a.3.3 0 0 0 0 .14l.78 4.56c.065.336.03.684-.1 1a1.65 1.65 0 0 1-.61.77a1.83 1.83 0 0 1-.92.35h-.13a1.8 1.8 0 0 1-.84-.21l-4.1-2.14a.28.28 0 0 0-.28 0l-4.1 2.15a1.9 1.9 0 0 1-1 .21a1.83 1.83 0 0 1-.93-.35a1.75 1.75 0 0 1-.61-.78a1.8 1.8 0 0 1-.1-1l.78-4.55a.23.23 0 0 0 0-.14a.4.4 0 0 0-.07-.12l-3.3-3.24a1.8 1.8 0 0 1-.49-.85a1.75 1.75 0 0 1 0-1a1.81 1.81 0 0 1 1.49-1.21l4.5-.66a.18.18 0 0 0 .12-.05a.3.3 0 0 0 .09-.11l2.1-4.18c.143-.3.369-.553.65-.73a1.79 1.79 0 0 1 2.57.74l2.08 4.16a.4.4 0 0 0 .1.12a.2.2 0 0 0 .13.05l4.57.66c.332.05.644.192.9.41c.251.217.441.496.55.81c.106.32.124.662.05.99"/></g><defs><clipPath id="SVGwDJxaeOQ2"><path fill="#fff" d="M2 2.395h20v19.21H2z"/></clipPath></defs></g></svg>
+            </div>
+            <div>Favoris</div>
+        </a>
+        <div style="width: 56px;"></div>
+        <a href="#" class="nav-item active">
+            <div class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10m1-10V7h-2v7h6v-2z"/></svg>
+            </div>
+            <div>Historique</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 1024 1024"><path fill="currentColor" d="M160 448a32 32 0 0 1-32-32V160.064a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V416a32 32 0 0 1-32 32zm448 0a32 32 0 0 1-32-32V160.064a32 32 0 0 1 32-32h255.936a32 32 0 0 1 32 32V416a32 32 0 0 1-32 32zM160 896a32 32 0 0 1-32-32V608a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32zm448 0a32 32 0 0 1-32-32V608a32 32 0 0 1 32-32h255.936a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32z"/></svg>
+            </div>
+            <div>Menu</div>
+        </a>
+        <button class="coupon-btn">
+            <div class="coupon-icon">
+                <svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000" transform="rotate(-45)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.024"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#ffffff;} </style> <g> <path class="st0" d="M512,210.781v-60.474c0-23.885-19.362-43.247-43.243-43.247H43.242C19.361,107.059,0,126.421,0,150.306v60.878 c21.957,3.154,38.854,21.988,38.854,44.819S21.957,297.67,0,300.816v60.886c0,23.877,19.361,43.239,43.242,43.239h425.514 c23.881,0,43.243-19.362,43.243-43.239v-60.483c-24.026-1.124-43.173-20.907-43.173-45.215 C468.827,231.697,487.974,211.914,512,210.781z M121.515,377.656h-14.877v-38.802h14.877V377.656z M121.515,309.485h-14.877 v-38.801h14.877V309.485z M121.515,241.316h-14.877v-38.81h14.877V241.316z M121.515,173.147h-14.877v-38.802h14.877V173.147z"></path> </g> </g></svg>
+            </div>
+        </button>
+    </div>
+
+<script>
+function ouvrirDetails() {
+    window.location.href = 'valide.html';
+}
+</script>
+</body>
+</html>

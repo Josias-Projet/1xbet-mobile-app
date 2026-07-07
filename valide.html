@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>1xbet</title>
+    <link rel="icon" type="image/png" href="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3HvfN4jsIwWZm1vXN9A_LTpIvjqDMMG1m3Q&s">
+    <style>
+        /* Remplacez au début de votre CSS */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            outline: none;
+        }
+
+        body {
+            font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #F5F5F5;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        /* Pour les textes spécifiques */
+        .bet-type {
+            font-size: 12px;
+            font-weight: 700;
+            color: #063163;
+            margin-bottom: 2px;
+            font-family: 'Roboto', sans-serif;
+            letter-spacing: -0.3px;
+        }
+
+        .team-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #063163;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .score {
+            font-size: 20px;
+            font-weight: 700;
+            color: #063163;
+            min-width: 40px;
+            text-align: center;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        /* En-tête */
+        .header {
+            background: #F5F5F5;
+            padding: 10px 160px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            margin-bottom: 0px;
+        }
+
+        .back-btn {
+            color: #6488A4;
+            font-size: 35px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            font-weight: 300;
+        }
+
+        .header-title {
+            color: #6488A4;
+            font-size: 15px;
+            font-weight: 600;
+            padding-left: 30px;
+            text-align: center;
+        }
+
+        .menu-btn {
+            color: #6488A4;
+            font-size: 30px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+        }
+
+        /* Transition pour bet-summary */
+.bet-summary {
+    background: #F5F5F5;
+    padding: 20px;
+    padding-top: 0px;
+    flex-shrink: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Éléments qui disparaissent en glissant vers le haut */
+.bet-type-section,
+.bet-summary > .divider:first-of-type,
+#eventsRow,
+#statusRow {
+    transform: translateY(0);
+    opacity: 1;
+    max-height: 200px;
+    transition: transform 0.0s ease, opacity 0.0s ease, max-height 0.0s ease;
+}
+
+#slideRow {
+    transform: translateY(0);
+    opacity: 1;
+    max-height: 200px;
+    transition: transform 0.0s ease, opacity 0.0s ease, max-height 0.0s ease;
+}
+
+.bet-type-section.slide-up,
+.bet-summary > .divider:first-of-type.slide-up,
+#eventsRow.slide-up,
+#statusRow.slide-up {
+    transform: translateY(-100%);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#slideRow.slide-up {
+    transform: translateY(-100%);
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+/* Version compacte cachée par défaut */
+#compactInfoGrid {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+}
+
+#compactInfoGrid.show {
+    opacity: 1;
+    max-height: 200px;
+}
+
+/* Supprimer les anciennes règles de transition pour info-grid */
+.info-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+        .bet-type-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 5px;
+        }
+
+        .bet-icon-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .bet-icon {
+            width: 37px;
+            height: 37px;
+            background: #E8F1FB;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .bet-icon svg {
+            width: 20px;
+            height: 29px;
+            fill: #6488A4;
+        }
+
+        .check-badge {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: #4BB867;
+            color: #F5F5F5;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #F5F5F5;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .bet-type-info {
+            flex: 1;
+            line-height: 1;
+        }
+
+        .bet-date {
+            color: #6488A4;
+            font-size: 9px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            filter: opacity(70%);
+        }
+
+
+        .info-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            line-height: 1;
+        }
+
+        .info-label {
+            color: #6488A4;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .info-label svg {
+            width: 13px;
+            height: 16px;
+            fill: #6488A4;
+        }
+
+        .info-value {
+            text-align: right;
+            font-size: 13px;
+            font-weight: 1000;
+        }
+
+        .info-value.black {
+            color: #063163;
+        }
+
+        .info-value.green {
+            color: #4BB867;
+        }
+
+        /* Contenu défilable */
+        .scrollable-content {
+            flex: 1;
+            overflow-y: auto;
+            background: #EBEEF3;
+            border-radius: 20px 20px 0 0;
+            padding: 8px 0 63px 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .scrollable-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Cartes d'événement */
+        .event-card {
+            background: #F5F5F5;
+            margin: 0 auto 7px;
+            border-radius: 12px;
+            padding: 16px;
+            width: 96%;
+        }
+
+        .event-header {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 14px;
+        }
+
+        .event-icon svg {
+            width: 25px;
+            height: 25px;
+            fill: #6488A4;
+            gap: 1px;
+            filter: opacity(70%);
+        }
+
+        .event-info {
+            flex: 1;
+            line-height: 1.2;
+            margin-bottom: 3px;
+        }
+
+        .event-league {
+            color: #6488A4;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .event-date {
+            color: #6488A4;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Match */
+        .match {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 9px 20px;
+        }
+
+        .team {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            
+        }
+
+        .team.left {
+            flex-direction: row;
+            justify-content: flex-end;
+            text-align: right;
+        }
+
+        .team.right {
+            flex-direction: row;
+            justify-content: flex-start;
+            text-align: left;
+        }
+
+        .team-name {
+            font-size: 12px;
+            font-weight: 800;
+            color: #063163;
+        }
+
+        .team-logo {
+            width: 25px;
+            height: 25px;
+            flex-shrink: 0;
+        }
+
+        .team-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .score {
+            font-size: 15px;
+            font-weight: bold;
+            color: #063163;
+            min-width: 35px;
+            text-align: center;
+        }
+
+        .match-details {
+            text-align: center;
+            color: #6488A4;
+            font-size: 10px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .divider {
+            height: 1px;
+            background: #EBEEF3;
+            margin: 7px 0;
+        }
+
+        .bet-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .bet-option {
+            color: #063163;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .bet-odds {
+            color: #063163;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .status-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            line-height: 1;
+        }
+
+        .status-label {
+            color: #6488A4;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .status-value {
+            color: #4BB867;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* Pied de page */
+        .bottom-nav {
+            background: #F5F5F5;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 8px 0 12px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            max-width: 480px;
+            margin: 0 auto;
+            z-index: 10;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #6488A4;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            flex: 1;
+            max-width: 70px;
+        }
+
+        .nav-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-icon svg {
+            width: 20px;
+            height: 20px;
+            fill: #6488A4;
+        }
+
+        .nav-item.active {
+            color: #2075D2;
+        }
+
+        .nav-item.active .nav-icon svg {
+            fill: #2075D2;
+        }
+
+        .coupon-btn {
+            position: absolute;
+            bottom: 35px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45px;
+            height: 45px;
+            background: #2075D2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(32, 117, 210, 0.3);
+            cursor: pointer;
+            z-index: 11;
+            border: none;
+        }
+
+        .coupon-icon svg {
+            width: 25px;
+            height: 25px;
+            fill: #F5F5F5;
+        }
+
+        .coupon-label {
+            color: #2075D2;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* Icône de notification dans le header */
+.notification-btn {
+    color: #6488A4;
+    font-size: 24px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    
+    display: flex;
+}
+
+.notification-btn svg {
+    width: 24px;
+    height: 24px;
+    fill: #6488A4;
+}
+
+.header {
+    background: #F5F5F5;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+}
+
+/* Badge Europa League dans le header de l'événement */
+.event-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    position: relative;
+}
+
+.league-badge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: #5A7FFF;
+    color: #F5F5F5;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 5px;
+    letter-spacing: 0.3px;
+}
+
+
+
+
+
+
+/* Ligne de date avec badge */
+.bet-date-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0px;
+    gap: 8px;
+}
+
+
+/* Badge dans le bet-summary */
+.bet-type-badge {
+    background: #5A7FFF;
+    color: #F5F5F5;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+    flex-shrink: 0;
+}
+
+.bet-type-info {
+    flex: 1;
+    line-height: 1;
+}
+
+.bet-type {
+    font-size: 14px;
+    font-weight: 700;
+    color: #063163;
+    margin-bottom: 2px;
+}
+
+.bet-number {
+    color: #6488A4;
+    font-size: 8px;
+    font-weight: 600;
+    
+}
+
+/* Animation de zoom rapide au clic (remplace le survol/highlight par défaut) */
+@keyframes tapZoom {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.18); }
+    100% { transform: scale(1); }
+}
+
+.tap-zoom {
+    animation: tapZoom 0.22s ease;
+}
+
+.back-btn,
+.nav-item {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+    </style>
+</head>
+<body>
+    <!-- En-tête -->
+    <div class="header">
+        <button class="back-btn" onclick="animatedNav(this, 'historique.html')">‹</button>
+        <div class="header-title">Informations sur le pari</div>
+        <button class="menu-btn">⋯</button>
+    </div>
+
+    <!-- Résumé du pari -->
+    <div class="bet-summary">
+        <div class="bet-type-section">
+            <div class="bet-icon-wrapper">
+                <div class="bet-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16"><path  d="M1.5 0A1.5 1.5 0 0 0 0 1.5v2A1.5 1.5 0 0 0 1.5 5h13A1.5 1.5 0 0 0 16 3.5v-2A1.5 1.5 0 0 0 14.5 0zm1 2h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1 0-1m9.927.427A.25.25 0 0 1 12.604 2h.792a.25.25 0 0 1 .177.427l-.396.396a.25.25 0 0 1-.354 0zM0 8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm1 3v2a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2zm14-1V8a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v2zM2 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0 4a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/></svg>
+                </div>
+                <div class="check-badge">✓</div>
+            </div>
+            <div class="bet-type-info">
+                <div class="bet-date">29.01.2026 (12:07)</div>
+                <div class="bet-type">Combiné</div>
+                <div class="bet-number">N° 76489883509</div>
+            </div>
+        </div>
+        <div class="divider" id="slideRow"></div>
+        <div class="info-grid" id="fullInfoGrid">
+            <div class="info-row" id="eventsRow">
+                <div class="info-label">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512"><path fill="currentColor" d="M256 256c-13.47 0-26.94-2.39-37.44-7.17l-148-67.49C63.79 178.26 48 169.25 48 152.24s15.79-26 22.58-29.12l149.28-68.07c20.57-9.4 51.61-9.4 72.19 0l149.37 68.07c6.79 3.09 22.58 12.1 22.58 29.12s-15.79 26-22.58 29.11l-148 67.48C282.94 253.61 269.47 256 256 256m176.76-100.86"/><path fill="currentColor" d="M441.36 226.81L426.27 220l-38.77 17.74l-94 43c-10.5 4.8-24 7.19-37.44 7.19s-26.93-2.39-37.42-7.19l-94.07-43L85.79 220l-15.22 6.84C63.79 229.93 48 239 48 256s15.79 26.08 22.56 29.17l148 67.63C229 357.6 242.49 360 256 360s26.94-2.4 37.44-7.19l147.87-67.61c6.81-3.09 22.69-12.11 22.69-29.2s-15.77-26.07-22.64-29.19"/><path fill="currentColor" d="m441.36 330.8l-15.09-6.8l-38.77 17.73l-94 42.95c-10.5 4.78-24 7.18-37.44 7.18s-26.93-2.39-37.42-7.18l-94.07-43L85.79 324l-15.22 6.84C63.79 333.93 48 343 48 360s15.79 26.07 22.56 29.15l148 67.59C229 461.52 242.54 464 256 464s26.88-2.48 37.38-7.27l147.92-67.57c6.82-3.08 22.7-12.1 22.7-29.16s-15.77-26.07-22.64-29.2"/></svg>
+                    <div class="info-value black">Événements : 9</div>
+                </div>
+                <div class="info-value black">9 sur 9 terminés</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Cotes:</div>
+                <div class="info-value black">78.693</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Mise:</div>
+                <div class="info-value black">20 000 ₣</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">Gains:</div>
+                <div class="info-value green">1 573 864.5₣</div>
+            </div>
+            <div class="info-row" id="statusRow">
+                <div class="info-label">Statut:</div>
+                <div class="info-value green">Payé</div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <!-- Contenu défilable -->
+    <div class="scrollable-content">
+        <!-- Événement 1 -->
+        <div class="event-card">
+            <div class="event-header">
+                <div class="event-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><path  d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m8 39.38l24.79-17.05a88.4 88.4 0 0 1 36.18 27l-8 26.94c-.2 0-.41.1-.61.17l-22.82 7.41a8 8 0 0 0-1 .4L136 88.62zM95.24 46.33L120 63.38v25.24l-28.56 19.67a8 8 0 0 0-1-.4l-22.82-7.41c-.2-.07-.41-.12-.61-.17l-8-26.94a88.4 88.4 0 0 1 36.23-27.04m-13 129.09H53.9a87.4 87.4 0 0 1-13.79-43.07l22-16.88a6 6 0 0 0 .58.22l22.83 7.42a8 8 0 0 0 .93.22l10.79 31.42c-.15.18-.3.36-.44.55l-14.1 19.41a8 8 0 0 0-.46.71M150.69 213a88.16 88.16 0 0 1-45.38 0l-10.06-28.4c.13-.16.27-.31.39-.48l14.11-19.42a8 8 0 0 0 .46-.7h35.58a8 8 0 0 0 .46.7l14.11 19.42c.12.17.26.32.39.48Zm23.07-37.61a8 8 0 0 0-.46-.71l-14.11-19.38c-.14-.19-.29-.37-.44-.55l10.79-31.42a8 8 0 0 0 .93-.22l22.83-7.42a6 6 0 0 0 .58-.22l22 16.88a87.4 87.4 0 0 1-13.79 43.07Z"/></svg>
+                </div>
+                <div class="event-info">
+                    <div class="event-league">Football . Angleterre. Premier League</div>
+                    <div class="event-date">19 janv. 2026 (21:00)</div>
+                </div>
+            </div>
+            <div class="match">
+                <div class="team left">
+                    <div class="team-name">Brighton & Hove Albion</div>
+                    <div class="team-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/sco/thumb/f/fd/Brighton_%26_Hove_Albion_logo.svg/960px-Brighton_%26_Hove_Albion_logo.svg.png" alt="Burgos" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                    </div>
+                </div>
+                <div class="score">1:1</div>
+                <div class="team right">
+                    <div class="team-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/sco/thumb/e/e5/AFC_Bournemouth_%282013%29.svg/960px-AFC_Bournemouth_%282013%29.svg.png" alt="Valencia" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                    </div>
+                    <div class="team-name">Bournemouth</div>
+                </div>
+            </div>
+            <div class="match-details">1:1 (0:1,1:0)</div>
+            <div class="divider"></div>
+            <div class="bet-details">
+                <div class="bet-option">Equipe 1 va gangner au moins une mi-temps. Oui</div>
+                <div class="bet-odds">1.42</div>
+            </div>
+            <div class="status-row">
+                <div class="status-label">Statut:</div>
+                <div class="status-value">Gagné</div>
+            </div>
+        </div>
+
+        <!-- Événement 2 -->
+        <div class="event-card">
+            <div class="event-header">
+                <div class="event-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><path  d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m8 39.38l24.79-17.05a88.4 88.4 0 0 1 36.18 27l-8 26.94c-.2 0-.41.1-.61.17l-22.82 7.41a8 8 0 0 0-1 .4L136 88.62zM95.24 46.33L120 63.38v25.24l-28.56 19.67a8 8 0 0 0-1-.4l-22.82-7.41c-.2-.07-.41-.12-.61-.17l-8-26.94a88.4 88.4 0 0 1 36.23-27.04m-13 129.09H53.9a87.4 87.4 0 0 1-13.79-43.07l22-16.88a6 6 0 0 0 .58.22l22.83 7.42a8 8 0 0 0 .93.22l10.79 31.42c-.15.18-.3.36-.44.55l-14.1 19.41a8 8 0 0 0-.46.71M150.69 213a88.16 88.16 0 0 1-45.38 0l-10.06-28.4c.13-.16.27-.31.39-.48l14.11-19.42a8 8 0 0 0 .46-.7h35.58a8 8 0 0 0 .46.7l14.11 19.42c.12.17.26.32.39.48Zm23.07-37.61a8 8 0 0 0-.46-.71l-14.11-19.38c-.14-.19-.29-.37-.44-.55l10.79-31.42a8 8 0 0 0 .93-.22l22.83-7.42a6 6 0 0 0 .58-.22l22 16.88a87.4 87.4 0 0 1-13.79 43.07Z"/></svg>
+                </div>
+                <div class="event-info">
+                    <div class="event-league">Football . Espagne. La Liga</div>
+                    <div class="event-date">19 janv. 2026 (21:00)</div>
+                </div>
+            </div>
+            <div class="match">
+                <div class="team left">
+                    <div class="team-name">Elche</div>
+                    <div class="team-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzxu08cZWj0SMeavyfk-EHMjf0sqEZHlT-lw&s" alt="Augsburg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                    </div>
+                </div>
+                <div class="score">2:2</div>
+                <div class="team right">
+                    <div class="team-logo">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQgY1xt4YDlktoFld2bLkIMLrNNt0oj0dPuCg&s" alt="Union Berlin" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                    </div>
+                    <div class="team-name">Séville</div>
+                </div>
+            </div>
+            <div class="match-details">2:2 (1:0,1:2)</div>
+            <div class="divider"></div>
+            <div class="bet-details">
+                <div class="bet-option">Total. (2.5) Plus de</div>
+                <div class="bet-odds">2.32</div>
+            </div>
+            <div class="status-row">
+                <div class="status-label">Statut:</div>
+                <div class="status-value">Gagné</div>
+            </div>
+        </div>
+
+        <!-- Événement 3 -->
+        <div class="event-card">
+            <div class="event-header">
+                <div class="event-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><path  d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m8 39.38l24.79-17.05a88.4 88.4 0 0 1 36.18 27l-8 26.94c-.2 0-.41.1-.61.17l-22.82 7.41a8 8 0 0 0-1 .4L136 88.62zM95.24 46.33L120 63.38v25.24l-28.56 19.67a8 8 0 0 0-1-.4l-22.82-7.41c-.2-.07-.41-.12-.61-.17l-8-26.94a88.4 88.4 0 0 1 36.23-27.04m-13 129.09H53.9a87.4 87.4 0 0 1-13.79-43.07l22-16.88a6 6 0 0 0 .58.22l22.83 7.42a8 8 0 0 0 .93.22l10.79 31.42c-.15.18-.3.36-.44.55l-14.1 19.41a8 8 0 0 0-.46.71M150.69 213a88.16 88.16 0 0 1-45.38 0l-10.06-28.4c.13-.16.27-.31.39-.48l14.11-19.42a8 8 0 0 0 .46-.7h35.58a8 8 0 0 0 .46.7l14.11 19.42c.12.17.26.32.39.48Zm23.07-37.61a8 8 0 0 0-.46-.71l-14.11-19.38c-.14-.19-.29-.37-.44-.55l10.79-31.42a8 8 0 0 0 .93-.22l22.83-7.42a6 6 0 0 0 .58-.22l22 16.88a87.4 87.4 0 0 1-13.79 43.07Z"/></svg>
+                </div>
+                <div class="event-info">
+                    <div class="event-league">Football . Italie. Série A</div>
+                    <div class="event-date">19 janv. 2026 (18:30)</div>
+                </div>
+            </div>
+            <div class="match">
+                <div class="team left">
+                    <div class="team-name">Cremonese</div>
+                    <div class="team-logo">
+                        <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/a/a8/Logo_US_Cremonese_2018.svg/1200px-Logo_US_Cremonese_2018.svg.png" alt="Como" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                    </div>
+                </div>
+                <div class="score">0:0</div>
+                <div class="team right">
+                    <div class="team-logo">
+                        <img src="https://assets.football-logos.cc/logos/italy/700x700/verona.c7fac3dd.png" alt="Milan" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                    </div>
+                    <div class="team-name">Hellas Verona</div>
+                </div>
+            </div>
+            <div class="match-details">0:0 (0:0,0:0)</div>
+            <div class="divider"></div>
+            <div class="bet-details">
+                <div class="bet-option">Total. (2.5) Moins de </div>
+                <div class="bet-odds">1.62</div>
+            </div>
+            <div class="status-row">
+                <div class="status-label">Statut:</div>
+                <div class="status-value">Gagné</div>
+            </div>
+        </div>
+        
+             <!-- Événement 4 -->
+     <div class="event-card">
+        <div class="event-header">
+            <div class="event-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><path  d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m8 39.38l24.79-17.05a88.4 88.4 0 0 1 36.18 27l-8 26.94c-.2 0-.41.1-.61.17l-22.82 7.41a8 8 0 0 0-1 .4L136 88.62zM95.24 46.33L120 63.38v25.24l-28.56 19.67a8 8 0 0 0-1-.4l-22.82-7.41c-.2-.07-.41-.12-.61-.17l-8-26.94a88.4 88.4 0 0 1 36.23-27.04m-13 129.09H53.9a87.4 87.4 0 0 1-13.79-43.07l22-16.88a6 6 0 0 0 .58.22l22.83 7.42a8 8 0 0 0 .93.22l10.79 31.42c-.15.18-.3.36-.44.55l-14.1 19.41a8 8 0 0 0-.46.71M150.69 213a88.16 88.16 0 0 1-45.38 0l-10.06-28.4c.13-.16.27-.31.39-.48l14.11-19.42a8 8 0 0 0 .46-.7h35.58a8 8 0 0 0 .46.7l14.11 19.42c.12.17.26.32.39.48Zm23.07-37.61a8 8 0 0 0-.46-.71l-14.11-19.38c-.14-.19-.29-.37-.44-.55l10.79-31.42a8 8 0 0 0 .93-.22l22.83-7.42a6 6 0 0 0 .58-.22l22 16.88a87.4 87.4 0 0 1-13.79 43.07Z"/></svg>
+            </div>
+            <div class="event-info">
+                <div class="event-league">Football. Italie. Série A</div>
+                <div class="event-date">19 janv. 2026 (20:45)</div>
+            </div>
+        </div>
+        <div class="match">
+            <div class="team left">
+                <div class="team-name">Lazio</div>
+                <div class="team-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/sco/thumb/e/e4/SS_Lazio.svg/1200px-SS_Lazio.svg.png" alt="Augsburg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                </div>
+            </div>
+            <div class="score">0:2</div>
+            <div class="team right">
+                <div class="team-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Logo_Como_1907_2019.png" alt="Union Berlin" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                </div>
+                <div class="team-name">Como</div>
+            </div>
+        </div>
+        <div class="match-details">0:2</div>
+        <div class="divider"></div>
+        <div class="bet-details">
+            <div class="bet-option">Total 2. (O.5) Plus de. 1ère mi-temps</div>
+            <div class="bet-odds">1.94</div>
+        </div>
+        <div class="status-row">
+            <div class="status-label">Statut:</div>
+            <div class="status-value">Gagné</div>
+        </div>
+    </div>
+
+         <!-- Événement 5 -->
+
+     <div class="event-card">
+        <div class="event-header">
+            <div class="event-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><path  d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m8 39.38l24.79-17.05a88.4 88.4 0 0 1 36.18 27l-8 26.94c-.2 0-.41.1-.61.17l-22.82 7.41a8 8 0 0 0-1 .4L136 88.62zM95.24 46.33L120 63.38v25.24l-28.56 19.67a8 8 0 0 0-1-.4l-22.82-7.41c-.2-.07-.41-.12-.61-.17l-8-26.94a88.4 88.4 0 0 1 36.23-27.04m-13 129.09H53.9a87.4 87.4 0 0 1-13.79-43.07l22-16.88a6 6 0 0 0 .58.22l22.83 7.42a8 8 0 0 0 .93.22l10.79 31.42c-.15.18-.3.36-.44.55l-14.1 19.41a8 8 0 0 0-.46.71M150.69 213a88.16 88.16 0 0 1-45.38 0l-10.06-28.4c.13-.16.27-.31.39-.48l14.11-19.42a8 8 0 0 0 .46-.7h35.58a8 8 0 0 0 .46.7l14.11 19.42c.12.17.26.32.39.48Zm23.07-37.61a8 8 0 0 0-.46-.71l-14.11-19.38c-.14-.19-.29-.37-.44-.55l10.79-31.42a8 8 0 0 0 .93-.22l22.83-7.42a6 6 0 0 0 .58-.22l22 16.88a87.4 87.4 0 0 1-13.79 43.07Z"/></svg>
+            </div>
+            <div class="event-info">
+                <div class="event-league">Football. Championnat de Turquie. Süper Lig</div>
+                <div class="event-date">19 janv. 2026 (18:00)</div>
+            </div>
+        </div>
+        <div class="match">
+            <div class="team left">
+                <div class="team-name">Besiktas</div>
+                <div class="team-logo">
+                    <img src="https://static.vecteezy.com/system/resources/previews/044/626/777/non_2x/bjk-besiktas-logo-on-transparent-background-free-vector.jpg" alt="Augsburg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                </div>
+            </div>
+            <div class="score">1:0</div>
+            <div class="team right">
+                <div class="team-logo">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGx0j74cfFxCq4lEOK4l61ZAUT0SeinRtUTA&s" alt="Union Berlin" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                </div>
+                <div class="team-name">Kayserispor</div>
+            </div>
+        </div>
+        <div class="match-details">1:0 (0:0,1:0)</div>
+        <div class="divider"></div>
+        <div class="bet-details">
+            <div class="bet-option">Deux équipes vont marquer. Non</div>
+            <div class="bet-odds">2.308</div>
+        </div>
+        <div class="status-row">
+            <div class="status-label">Statut:</div>
+            <div class="status-value">Gagné</div>
+        </div>
+    </div>
+
+             <!-- Événement 6 -->
+     <div class="event-card">
+        <div class="event-header">
+            <div class="event-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><path  d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m8 39.38l24.79-17.05a88.4 88.4 0 0 1 36.18 27l-8 26.94c-.2 0-.41.1-.61.17l-22.82 7.41a8 8 0 0 0-1 .4L136 88.62zM95.24 46.33L120 63.38v25.24l-28.56 19.67a8 8 0 0 0-1-.4l-22.82-7.41c-.2-.07-.41-.12-.61-.17l-8-26.94a88.4 88.4 0 0 1 36.23-27.04m-13 129.09H53.9a87.4 87.4 0 0 1-13.79-43.07l22-16.88a6 6 0 0 0 .58.22l22.83 7.42a8 8 0 0 0 .93.22l10.79 31.42c-.15.18-.3.36-.44.55l-14.1 19.41a8 8 0 0 0-.46.71M150.69 213a88.16 88.16 0 0 1-45.38 0l-10.06-28.4c.13-.16.27-.31.39-.48l14.11-19.42a8 8 0 0 0 .46-.7h35.58a8 8 0 0 0 .46.7l14.11 19.42c.12.17.26.32.39.48Zm23.07-37.61a8 8 0 0 0-.46-.71l-14.11-19.38c-.14-.19-.29-.37-.44-.55l10.79-31.42a8 8 0 0 0 .93-.22l22.83-7.42a6 6 0 0 0 .58-.22l22 16.88a87.4 87.4 0 0 1-13.79 43.07Z"/></svg>
+            </div>
+            <div class="event-info">
+                <div class="event-league">Football. Championnat de Turquie. Süper Lig</div>
+                <div class="event-date">19 janv. 2026 (15:00)</div>
+            </div>
+        </div>
+        <div class="match">
+            <div class="team left">
+                <div class="team-name">Konyaspor</div>
+                <div class="team-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/7/75/Konyaspor_%28logo%29.svg/1280px-Konyaspor_%28logo%29.svg.png" alt="Augsburg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                </div>
+            </div>
+            <div class="score">1:1</div>
+            <div class="team right">
+                <div class="team-logo">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Ey%C3%BCpspor_Logosu.png/250px-Ey%C3%BCpspor_Logosu.png" alt="Union Berlin" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                </div>
+                <div class="team-name">Eyüpspor</div>
+            </div>
+        </div>
+        <div class="match-details">1:1 (0:0,1:1)</div>
+        <div class="divider"></div>
+        <div class="bet-details">
+            <div class="bet-option">Deux équipes vont marquer. Oui</div>
+            <div class="bet-odds">1.84</div>
+        </div>
+        <div class="status-row">
+            <div class="status-label">Statut:</div>
+            <div class="status-value">Gagné</div>
+        </div>
+    </div>
+
+                 <!-- Événement 7 -->
+                 <div class="event-card">
+                    <div class="event-header">
+                        <div class="event-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256"><path  d="M128 24a104 104 0 1 0 104 104A104.11 104.11 0 0 0 128 24m8 39.38l24.79-17.05a88.4 88.4 0 0 1 36.18 27l-8 26.94c-.2 0-.41.1-.61.17l-22.82 7.41a8 8 0 0 0-1 .4L136 88.62zM95.24 46.33L120 63.38v25.24l-28.56 19.67a8 8 0 0 0-1-.4l-22.82-7.41c-.2-.07-.41-.12-.61-.17l-8-26.94a88.4 88.4 0 0 1 36.23-27.04m-13 129.09H53.9a87.4 87.4 0 0 1-13.79-43.07l22-16.88a6 6 0 0 0 .58.22l22.83 7.42a8 8 0 0 0 .93.22l10.79 31.42c-.15.18-.3.36-.44.55l-14.1 19.41a8 8 0 0 0-.46.71M150.69 213a88.16 88.16 0 0 1-45.38 0l-10.06-28.4c.13-.16.27-.31.39-.48l14.11-19.42a8 8 0 0 0 .46-.7h35.58a8 8 0 0 0 .46.7l14.11 19.42c.12.17.26.32.39.48Zm23.07-37.61a8 8 0 0 0-.46-.71l-14.11-19.38c-.14-.19-.29-.37-.44-.55l10.79-31.42a8 8 0 0 0 .93-.22l22.83-7.42a6 6 0 0 0 .58-.22l22 16.88a87.4 87.4 0 0 1-13.79 43.07Z"/></svg>
+                        </div>
+                        <div class="event-info">
+                            <div class="event-league">Football. Championnat de Turquie. Süper Lig</div>
+                            <div class="event-date">19 janv. 2026 (18:00)</div>
+                        </div>
+                    </div>
+                    <div class="match">
+                        <div class="team left">
+                            <div class="team-name">Goztepe</div>
+                            <div class="team-logo">
+                                <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/0/07/Logo_G%C3%B6ztepe_SK_2023.svg/960px-Logo_G%C3%B6ztepe_SK_2023.svg.png" alt="Augsburg" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                            </div>
+                        </div>
+                        <div class="score">2:1</div>
+                        <div class="team right">
+                            <div class="team-logo">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5hKaAQPFymAOhndNSXKtUPpfmIBJCsInSvw&s" alt="Union Berlin" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22%3E%3Cpath fill=%22%236488A4%22 d=%22M12,2L3,7v6c0,5.55,3.84,10.74,9,12c5.16-1.26,9-6.45,9-12V7L12,2z%22/%3E%3C/svg%3E'">
+                            </div>
+                            <div class="team-name">Çaykur Rizespor</div>
+                        </div>
+                    </div>
+                    <div class="match-details">2:1</div>
+                    <div class="divider"></div>
+                    <div class="bet-details">
+                        <div class="bet-option">Total. (1.5) Plus de. 2ème mi-temps</div>
+                        <div class="bet-odds">1.887</div>
+                    </div>
+                    <div class="status-row">
+                        <div class="status-label">Statut:</div>
+                        <div class="status-value">Gagné</div>
+                    </div>
+                </div>
+    </div>
+
+    <!-- Navigation du bas -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item">
+            <div class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0  16 15"><path fill="currentColor" d="M8 16c3.314 0 6-2 6-5.5c0-1.5-.5-4-2.5-6c.25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6c-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75c0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5c-.179 1-.25 2 1 3c.625.5 1 1.364 1 2.25C11 14 9.657 15 8 15"/></svg>
+            </div>
+            <div>Populaire</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none"><g clip-path="url(#SVGwDJxaeOQ)"><path fill="currentColor" d="M21.95 10.605a1.75 1.75 0 0 1-.5.86l-3.3 3.22a.4.4 0 0 0-.08.12a.3.3 0 0 0 0 .14l.78 4.56c.065.336.03.684-.1 1a1.65 1.65 0 0 1-.61.77a1.83 1.83 0 0 1-.92.35h-.13a1.8 1.8 0 0 1-.84-.21l-4.1-2.14a.28.28 0 0 0-.28 0l-4.1 2.15a1.9 1.9 0 0 1-1 .21a1.83 1.83 0 0 1-.93-.35a1.75 1.75 0 0 1-.61-.78a1.8 1.8 0 0 1-.1-1l.78-4.55a.23.23 0 0 0 0-.14a.4.4 0 0 0-.07-.12l-3.3-3.24a1.8 1.8 0 0 1-.49-.85a1.75 1.75 0 0 1 0-1a1.81 1.81 0 0 1 1.49-1.21l4.5-.66a.18.18 0 0 0 .12-.05a.3.3 0 0 0 .09-.11l2.1-4.18c.143-.3.369-.553.65-.73a1.79 1.79 0 0 1 2.57.74l2.08 4.16a.4.4 0 0 0 .1.12a.2.2 0 0 0 .13.05l4.57.66c.332.05.644.192.9.41c.251.217.441.496.55.81c.106.32.124.662.05.99"/></g><defs><clipPath id="SVGwDJxaeOQ"><path fill="#fff" d="M2 2.395h20v19.21H2z"/></clipPath></defs></g></svg>
+            </div>
+            <div>Favoris</div>
+        </a>
+        <div style="width: 56px;"></div>
+        <a href="historique.html" class="nav-item active" onclick="event.preventDefault(); animatedNav(this, 'historique.html')">
+            <div class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10m1-10V7h-2v7h6v-2z"/></svg>
+            </div>
+            <div>Historique</div>
+        </a>
+        <a href="#" class="nav-item">
+            <div class="nav-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024"><path fill="currentColor" d="M160 448a32 32 0 0 1-32-32V160.064a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32V416a32 32 0 0 1-32 32zm448 0a32 32 0 0 1-32-32V160.064a32 32 0 0 1 32-32h255.936a32 32 0 0 1 32 32V416a32 32 0 0 1-32 32zM160 896a32 32 0 0 1-32-32V608a32 32 0 0 1 32-32h256a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32zm448 0a32 32 0 0 1-32-32V608a32 32 0 0 1 32-32h255.936a32 32 0 0 1 32 32v256a32 32 0 0 1-32 32z"/></svg>
+            </div>
+            <div>Menu</div>
+        </a>
+        <button class="coupon-btn">
+            <div class="coupon-icon">
+               <svg height="200px" width="200px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve" fill="#000000" transform="rotate(-45)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.024"></g><g id="SVGRepo_iconCarrier"> <style type="text/css"> .st0{fill:#ffffff;} </style> <g> <path class="st0" d="M512,210.781v-60.474c0-23.885-19.362-43.247-43.243-43.247H43.242C19.361,107.059,0,126.421,0,150.306v60.878 c21.957,3.154,38.854,21.988,38.854,44.819S21.957,297.67,0,300.816v60.886c0,23.877,19.361,43.239,43.242,43.239h425.514 c23.881,0,43.243-19.362,43.243-43.239v-60.483c-24.026-1.124-43.173-20.907-43.173-45.215 C468.827,231.697,487.974,211.914,512,210.781z M121.515,377.656h-14.877v-38.802h14.877V377.656z M121.515,309.485h-14.877 v-38.801h14.877V309.485z M121.515,241.316h-14.877v-38.81h14.877V241.316z M121.515,173.147h-14.877v-38.802h14.877V173.147z"></path> </g> </g></svg>
+            </div>
+        </button>
+    </div>
+
+    <script>
+        function animatedNav(el, url) {
+            el.classList.remove('tap-zoom');
+            // force reflow pour pouvoir relancer l'animation si cliqué plusieurs fois vite
+            void el.offsetWidth;
+            el.classList.add('tap-zoom');
+            setTimeout(function() {
+                window.location.href = url;
+            }, 180);
+        }
+
+        const scrollableContent = document.querySelector('.scrollable-content');
+const betTypeSection = document.querySelector('.bet-type-section');
+const firstDivider = document.querySelector('.bet-summary > .divider');
+const eventsRow = document.getElementById('eventsRow');
+const statusRow = document.getElementById('statusRow');
+const slideRow = document.getElementById('slideRow');
+const compactInfoGrid = document.getElementById('compactInfoGrid');
+
+let isCompactView = false;
+
+scrollableContent.addEventListener('scroll', function() {
+    const scrollTop = scrollableContent.scrollTop;
+    
+    if (scrollTop > 30 && !isCompactView) {
+        // Passer en mode compact
+        isCompactView = true;
+        betTypeSection.classList.add('slide-up');
+        firstDivider.classList.add('slide-up');
+        eventsRow.classList.add('slide-up');
+        statusRow.classList.add('slide-up');
+        slideRow.classList.add('slide-up');
+        compactInfoGrid.classList.add('show');
+    } else if (scrollTop <= 30 && isCompactView) {
+        // Revenir en mode normal
+        isCompactView = false;
+        betTypeSection.classList.remove('slide-up');
+        firstDivider.classList.remove('slide-up');
+        eventsRow.classList.remove('slide-up');
+        statusRow.classList.remove('slide-up');
+        slideRow.classList.remove('slide-up');
+        compactInfoGrid.classList.remove('show');
+    }
+});
+    </script>
+</body>
+</html>
